@@ -51,6 +51,8 @@ class block_ranking_manager {
 
         $usercompletion = self::get_module_completion($cmcid);
 
+		error_log('blocks/ranking/classes/manager.php: add_user_points');
+
         switch ($usercompletion->modulename) {
             case 'assign':
                 self::add_default_points($usercompletion, self::get_config('assignpoints'), $grade);
@@ -87,6 +89,8 @@ class block_ranking_manager {
     protected static function get_module_completion($cmcid) {
         global $DB;
 
+		error_log('blocks/ranking/classes/manager.php: get_module_completion');
+
         $sql = "SELECT
                     cmc.*,
                     cmc.id as cmcid,
@@ -117,6 +121,9 @@ class block_ranking_manager {
      * @return void
      */
     protected static function add_default_points($completion, $points = null, $grade = null) {
+
+		error_log('blocks/ranking/classes/manager.php: add_default_points');
+		
 
         if (!isset($points) || trim($points) != '') {
             $points = self::DEFAULT_POINTS;
@@ -151,6 +158,8 @@ class block_ranking_manager {
      */
     protected static function get_activity_finalgrade($activity, $activityid, $userid) {
         global $DB;
+
+		error_log('blocks/ranking/classes/manager.php: get_activity_finalgrade');
 
         $sql = "SELECT
                     gg.itemid, gg.userid, gg.rawscaleid, gg.finalgrade, gi.scaleid
@@ -193,6 +202,8 @@ class block_ranking_manager {
     protected static function get_finalgrade_by_scale($finalgrade, $scaleid) {
         global $DB;
 
+		error_log('blocks/ranking/classes/manager.php: get_finalgrade_by_scale');
+		
         $sql = "SELECT scale FROM {scale} WHERE id = :scaleid";
         $params['scaleid'] = $scaleid;
 
@@ -218,6 +229,8 @@ class block_ranking_manager {
      */
     protected static function add_or_update_user_points($userid, $courseid, $points) {
         global $DB;
+        
+        error_log('blocks/ranking/classes/manager.php: add_or_update_user_points');
 
         $sql = "SELECT * FROM {ranking_points}
                 WHERE userid = :userid AND courseid = :courseid";
@@ -258,6 +271,8 @@ class block_ranking_manager {
     protected static function add_ranking_log($rankingid, $courseid, $cmc, $points) {
         global $DB;
 
+		error_log('blocks/ranking/classes/manager.php: add_ranking_log');
+		
         $rankinglog = new stdClass();
         $rankinglog->rankingid = $rankingid;
         $rankinglog->courseid = $courseid;
@@ -279,6 +294,8 @@ class block_ranking_manager {
     protected static function get_config($name) {
         global $DB;
 
+		error_log('blocks/ranking/classes/manager.php: get_config');
+		
         if (empty(self::$config)) {
             $records = $DB->get_records('config_plugins', array('plugin' => 'block_ranking'));
 

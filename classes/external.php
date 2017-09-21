@@ -110,7 +110,7 @@ class blocks_ranking_external extends external_api {
 				$userfields = user_picture::fields('u', array('username'));
 				$from = "FROM {user} u
 						INNER JOIN {role_assignments} a ON a.userid = u.id
-						LEFT JOIN {ranking_points} r ON r.userid = u.id AND r.courseid = :r_courseid
+						INNER JOIN {ranking_points} r ON r.userid = u.id AND r.courseid = :r_courseid
 						INNER JOIN {context} c ON c.id = a.contextid";
 
 				$where = "WHERE a.contextid = :contextid

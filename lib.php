@@ -39,6 +39,8 @@ $coursescontexts = array();
 function block_ranking_get_students($limit = null) {
     global $COURSE, $DB, $PAGE;
 
+	error_log('blocks/ranking/classes/lib.php: block_ranking_get_students');
+
     // Get block ranking configuration.
     $cfgranking = get_config('block_ranking');
 
@@ -90,6 +92,8 @@ function block_ranking_get_students($limit = null) {
 function block_ranking_get_students_by_date($limit = null, $datestart, $dateend) {
     global $COURSE, $DB, $PAGE;
 
+	error_log('blocks/ranking/classes/lib.php: block_ranking_get_students_by_date');
+	
     // Get block ranking configuration.
     $cfgranking = get_config('block_ranking');
 
@@ -147,6 +151,8 @@ function block_ranking_get_students_by_date($limit = null, $datestart, $dateend)
 function block_ranking_print_students($rankinglastmonth, $rankinglastweek, $rankinggeral) {
     global $PAGE;
 
+	error_log('blocks/ranking/classes/lib.php: block_ranking_print_students');
+
     $tablelastweek = generate_table($rankinglastweek);
     $tablelastmonth = generate_table($rankinglastmonth);
     $tablegeral = generate_table($rankinggeral);
@@ -175,6 +181,8 @@ function block_ranking_print_students($rankinglastmonth, $rankinglastweek, $rank
 function block_ranking_print_individual_ranking() {
     global $USER, $COURSE;
 
+	error_log('blocks/ranking/classes/lib.php: block_ranking_print_individual_ranking');
+	
     if (!is_student($USER->id)) {
         return '';
     }
@@ -219,6 +227,8 @@ function block_ranking_print_individual_ranking() {
 function block_ranking_get_student_points($userid) {
     global $COURSE, $DB;
 
+	error_log('blocks/ranking/classes/lib.php: block_ranking_get_student_points');
+	
     $sql = "SELECT
                 sum(rl.points) as points
             FROM
@@ -246,6 +256,8 @@ function block_ranking_get_student_points($userid) {
 function block_ranking_get_student_points_by_date($userid, $datestart, $dateend) {
     global $COURSE, $DB;
 
+	error_log('blocks/ranking/classes/lib.php: block_ranking_get_student_points_by_date');
+	
     $sql = "SELECT
                 sum(rl.points) as points
             FROM
@@ -273,6 +285,8 @@ function block_ranking_get_student_points_by_date($userid, $datestart, $dateend)
  */
 function generate_table($data) {
     global $USER, $OUTPUT;
+
+	error_log('blocks/ranking/classes/lib.php: generate_table');
 
     if (empty($data)) {
         return get_string('nostudents', 'block_ranking');
